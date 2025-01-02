@@ -1,0 +1,27 @@
+Web Ends: 
+1) Frontend:  UI/UX ( Used HTML, CSS, React, JS)
+Main thing: HTML, CSS, JSS. Mostly works are done by browser Engine.
+---> JS on particular browser. It cant explore files on OS, files etc before. Later, node js break js limitation. It can work on backend too. 
+
+
+
+2) Backend: Data & Logical Things
+	  (Many options......) Old days - PHP, Python, JS, WordPress.....
+	  Stack are rapidly changed.
+	  Works are done on server side (mostly)....
+--->
+
+
+Intro:
+
+Js Release: 1995.
+Node JS Release: 2009 	
+
+Node js is opensource, cross-platform, backend JS Runtime enviroment that runs on the V8 engine and executes JavaScript code outside a web browser.
+
+Writen in C, C++ and JS.
+
+Node js engine can also used on differnt network, OS not only on browswer. (JS ma improvement lerayo).
+
+	It is not a programming language nor a framework, just a run time.  
+
