@@ -1,50 +1,50 @@
-// console.log("Hello From Node!");
+console.log("Hello From Node!");
 
-// console.log(2 === 2);
+console.log(2 === 2);
 
-// function add(a, b) {
-//   return a + b;
-// }
+function add(a, b) {
+  return a + b;
+}
 
-// console.log(add(2, 3));
+console.log(add(2, 3));
 
-// global.companyName = "Abi IT Solution";
+global.companyName = "Abi IT Solution";
 
-// console.log(companyName);
+console.log(companyName);
 
-// global.authorName = "Abishek Neupane";
+global.authorName = "Abishek Neupane";
 
-// console.log(authorName);
+console.log(authorName);
 
-// function printMe() {
-//   var abc = "abc";
-//   console.log(companyName);
-//   console.log(authorName);
-// }
+function printMe() {
+  var abc = "abc";
+  console.log(companyName);
+  console.log(authorName);
+}
 
-// printMe();
+printMe();
 
-// console.log(global);
+console.log(global);
 
-// healthPatner = "Nepal Medicity";
+healthPatner = "Nepal Medicity";
 
-// console.log(healthPatner);
+console.log(healthPatner);
 
-// console.log(process.platform);
+console.log(process.platform);
 
-// console.log(process.env);
+console.log(process.env);
 
-// setInterval(() => console.log("I will execute after 2 seconds."), 2000);
+setInterval(() => console.log("I will execute after 2 seconds."), 2000);
 
-// console.log("Extra Global");
+console.log("Extra Global");
 
-// console.log(__dirname);
+console.log(__dirname);
 
-// console.log(__filename);
+console.log(__filename);
 
-// //import export and used on JS
+//import export and used on JS
 
-// //require("");
+//require("");
 
 const add = require("./app");
 
