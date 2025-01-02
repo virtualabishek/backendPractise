@@ -1,11 +1,11 @@
 Web Ends: 
-1) Frontend:  UI/UX ( Used HTML, CSS, React, JS)
+(1) Frontend:  UI/UX ( Used HTML, CSS, React, JS)
 Main thing: HTML, CSS, JSS. Mostly works are done by browser Engine.
 ---> JS on particular browser. It cant explore files on OS, files etc before. Later, node js break js limitation. It can work on backend too. 
 
 
 
-2) Backend: Data & Logical Things
+(2) Backend: Data & Logical Things
 	  (Many options......) Old days - PHP, Python, JS, WordPress.....
 	  Stack are rapidly changed.
 	  Works are done on server side (mostly)....
@@ -25,3 +25,4 @@ Node js engine can also used on differnt network, OS not only on browswer. (JS m
 
 	It is not a programming language nor a framework, just a run time.  
 
+Builtin Globals in NodeJS
