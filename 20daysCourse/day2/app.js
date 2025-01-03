@@ -28,3 +28,6 @@ console.log(fileURLToPath(import.meta.url));
 console.log(dirname(fileURLToPath(import.meta.url)));
 
 // es6 are asynchronous where as common js are synchronous
+
+// some libary are written on common js, so we have to use babel too convert it and used it.
+
