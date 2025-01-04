@@ -1,5 +1,7 @@
 import http from "http";
 
+import chalk from "chalk";
+
 const server = http.createServer((req, res) => {
   if (req.url === "/books") {
     res.writeHead(200);
@@ -18,3 +20,5 @@ const server = http.createServer((req, res) => {
 server.listen(8000, () => {
   console.log("Server started succesfully!!!!");
 });
+
+console.log(chalk.bgCyan("Hello There. How are you?"));

@@ -5,13 +5,15 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "nodemon ."
+    "start": "nodemon .",
+    "server": "nodemon server.js"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
     "nodemon": "^3.1.9"
   },
   "dependencies": {
+    "chalk": "^5.4.1",
     "kill-port": "^2.0.1"
   }
 }
