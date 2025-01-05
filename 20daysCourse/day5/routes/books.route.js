@@ -1,6 +1,11 @@
 import express from "express";
+import validateToken from "../middlewares/validateToken.js";
 
 const router = express.Router();
+
+router.use((req, res, next) => {
+  validateToken(req, res, next);
+});
 
 router.get("/", (req, res) => {
   res.status(200).send("Router is running well.");
@@ -15,7 +20,8 @@ router.get("/submit", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
-  res.status(200).send({ added: true });
+  console.log(req.body);
+  res.status(200).send({ added: "true" });
 });
 
 router.get("/update/:id/:settings/:author", (req, res) => {
