@@ -35,3 +35,18 @@ CRUD stands for:
 
 1. **Table: SQL, Relational**  
    Data is stored in tables with rows and columns. Example schema:
+
+## ENV File
+
+.env or dotenv file is a simple configuration file for controlling our application .
+
+It contains
+a. **URLs and API Keys**
+b. **Domain names**
+c. **Keys**
+
+Example:
+
+API_BASE_URL=https://api.abishekn.com.np
+DB_USERNAME=iwillnottell
+DB_PASSWORD=iamnotdumb
