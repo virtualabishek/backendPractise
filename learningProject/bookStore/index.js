@@ -1,10 +1,23 @@
 import express from "express";
-import bookRouter from "./route/book.route.js";
+import bookRoutes from "./routes/book.route.js";
+import connection from "./models/index.js";
+
 const app = express();
-app.use(express.json());    
 
-app.use("/book", bookRouter);
+app.use(express.json());
 
-app.listen(8000, () => {
-  console.log("Server is started.");
+app.get("/", (req, res) => {
+  res.send("Backend is working well...");
+});
+app.use("/books", bookRoutes);
+
+app.listen(8000, async () => {
+  console.log("Server is running on port number: 8000");
+  try {
+    await connection.authenticate();
+    await connection.sync();
+    console.log("Connection started successfully.");
+  } catch (err) {
+    console.error("Database connection or sync failed:", err);
+  }
 });
