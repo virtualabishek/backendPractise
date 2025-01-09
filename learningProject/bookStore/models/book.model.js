@@ -24,7 +24,7 @@ const bookModel = connection.define(
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
