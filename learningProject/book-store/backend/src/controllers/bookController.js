@@ -2,7 +2,7 @@ import { json } from "sequelize";
 import bookModel from "../models/bookModel.js";
 import { Op } from "sequelize";
 
-export default class BooleanookController {
+export default class BookController {
   async addBook(req, res, imageName) {
     const data = await bookModel.create({ ...req.body, image: imageName });
     console.log(data);

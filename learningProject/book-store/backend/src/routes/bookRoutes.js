@@ -2,7 +2,7 @@ import express, { Router } from "express";
 import bookModel from "../models/bookModel.js";
 import { json } from "sequelize";
 import multer from "multer";
-import BooleanookController from "../controllers/bookController.js";
+import BookController from "../controllers/bookController.js";
 
 const router = express.Router();
 let imageName;
@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const bookController = new BooleanookController();
+const bookController = new BookController();
 const upload = multer({ storage: storage });
 //adding book
 router.post("/add", upload.single("image"), (req, res) => {
