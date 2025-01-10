@@ -29,11 +29,16 @@ router.post("/add", upload.single("image"), (req, res) => {
   bookController.addBook(req, res, imageName);
 });
 
-// get book
+// Routes
 router.get("/:id", bookController.getBookById);
+
+//list books with limit=20
+router.get("/", bookController.getBooks);
 
 router.put("/update/:id", bookController.updateBook);
 
 router.delete("/delete/:id", bookController.deleteBook);
+
+router.get("/search/all", bookController.searchBook);
 
 export default router;

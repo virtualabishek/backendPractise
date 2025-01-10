@@ -1,4 +1,6 @@
+import { json } from "sequelize";
 import bookModel from "../models/bookModel.js";
+import { Op } from "sequelize";
 
 export default class BooleanookController {
   async addBook(req, res, imageName) {
@@ -54,6 +56,48 @@ export default class BooleanookController {
         : res.json({ success: false, message: "Book cannot Deleted" });
     } else {
       res.json({ success: false, message: "BOok ID not found" });
+    }
+  }
+  async searchBook(req, res) {
+    const { q } = req.query;
+    if (q) {
+      const data = await bookModel.findAll({
+        where: {
+          [Op.or]: {
+            name: {
+              [Op.like]: `%${q}%`,
+            },
+            author: {
+              [Op.like]: `%${q}%`,
+            },
+          },
+        },
+      });
+      if (data[0]) {
+        console.log(data);
+        res.json(data);
+      } else {
+        res.json({ success: false, message: "Not Found." });
+      }
+    } else {
+      res.json({ success: false, message: "EMpty search, how it work?" });
+    }
+  }
+
+  async getBooks(req, res) {
+    try {
+      let { limit } = req.query;
+      //just make sure that the query is listed on a number.
+      limit = parseInt(limit, 10);
+      if (!limit) limit = 20;
+
+      const data = await bookModel.findAll({
+        limit,
+      });
+      res.json(data);
+      console.log(data);
+    } catch (err) {
+      console.log("There is error.", err);
     }
   }
 }
