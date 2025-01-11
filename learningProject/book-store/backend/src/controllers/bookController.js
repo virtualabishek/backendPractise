@@ -87,17 +87,24 @@ export default class BookController {
   async getBooks(req, res) {
     try {
       let { limit } = req.query;
-      //just make sure that the query is listed on a number.
+
       limit = parseInt(limit, 10);
       if (!limit) limit = 20;
 
-      const data = await bookModel.findAll({
-        limit,
+      const data = await bookModel.findAll({ limit });
+
+      const updatedData = data.map((book) => {
+        return {
+          ...book.dataValues,
+          image: "http://localhost:8000/uploads/" + book.dataValues.image,
+        };
       });
-      res.json(data);
-      console.log(data);
+
+      // console.log(updatedData);
+      res.json(updatedData);
     } catch (err) {
       console.log("There is error.", err);
+      res.status(500).json({ error: "Internal Server Error" });
     }
   }
 }

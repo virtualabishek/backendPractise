@@ -16,6 +16,8 @@ app.get("/", (req, res) => {
 
 app.use("/books", bookRoutes);
 
+app.use(express.static("public"));
+
 app.listen(process.env.PORT, async (req, res) => {
   console.log("Server has started.");
   try {
