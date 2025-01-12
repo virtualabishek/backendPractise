@@ -1,15 +1,24 @@
 import { json } from "sequelize";
 import bookModel from "../models/bookModel.js";
 import { Op } from "sequelize";
+import textConstant from "../constants/textConstant.js";
+import urlConstant from "../constants/urlConstant.js";
 
 export default class BookController {
   async addBook(req, res, imageName) {
-    const data = await bookModel.create({ ...req.body, image: imageName });
-    console.log(data);
-    if (data) {
-      res.json(data);
-    } else {
-      res.json({ success: false, message: "Book cannot be added." });
+    try {
+      const data = await bookModel.create({ ...req.body, image: imageName });
+      console.log(data);
+      if (data) {
+        res.json(data);
+      } else {
+        res.json({ success: false, message: "Book cannot be added." });
+      }
+    } catch (err) {
+      return res.json({
+        success: false,
+        message: "Error while quering the database",
+      });
     }
   }
 
@@ -22,7 +31,7 @@ export default class BookController {
         res.json(data);
       } else res.json([]);
     } else {
-      res.json({ success: false, message: "BOok Id cannot found" });
+      res.json({ success: false, message: textConstant.BOOK_ID_NOT_PROVIDED });
     }
   }
   async updateBook(req, res) {
@@ -55,7 +64,7 @@ export default class BookController {
         ? res.json({ success: true, message: "Deleted" })
         : res.json({ success: false, message: "Book cannot Deleted" });
     } else {
-      res.json({ success: false, message: "BOok ID not found" });
+      res.json({ success: false, message: textConstant.BOOK_ID_NOT_PROVIDED });
     }
   }
   async searchBook(req, res) {
@@ -80,31 +89,26 @@ export default class BookController {
         res.json({ success: false, message: "Not Found." });
       }
     } else {
-      res.json({ success: false, message: "EMpty search, how it work?" });
+      res.json({ success: false, message: "Empty search, how it work?" });
     }
   }
 
   async getBooks(req, res) {
+    let { limit } = req.query;
+    if (!limit) limit = 20;
     try {
-      let { limit } = req.query;
-
-      limit = parseInt(limit, 10);
-      if (!limit) limit = 20;
-
-      const data = await bookModel.findAll({ limit });
-
-      const updatedData = data.map((book) => {
-        return {
-          ...book.dataValues,
-          image: "http://localhost:8000/uploads/" + book.dataValues.image,
-        };
+      const data = await bookModel.findAll({
+        limit: parseInt(limit),
+        raw: true,
       });
-
-      // console.log(updatedData);
-      res.json(updatedData);
+      console.log(data);
+      for (let d of data) {
+        d.image = urlConstant.IMG_PATH_URL + d.image;
+        console.log(d.image);
+      }
+      res.json(data);
     } catch (err) {
-      console.log("There is error.", err);
-      res.status(500).json({ error: "Internal Server Error" });
+      res.json({ success: false, message: err });
     }
   }
 }
