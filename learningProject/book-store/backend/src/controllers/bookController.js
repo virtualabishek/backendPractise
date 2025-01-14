@@ -52,23 +52,39 @@ export default class BookController {
     }
   }
   async deleteBook(req, res) {
-    const { id } = req.params;
-    if (id) {
+    try {
+      const { id } = req.params;
+      if (!id) {
+        return res.json({
+          success: false,
+          message: textConstant.BOOK_ID_NOT_PROVIDED,
+        });
+      }
+
       const data = await bookModel.destroy({
-        where: {
-          id: id,
-        },
+        where: { id: id },
       });
-      console.log(data);
-      data[1]
-        ? res.json({ success: true, message: "Deleted" })
-        : res.json({ success: false, message: "Book cannot Deleted" });
-    } else {
-      res.json({ success: false, message: textConstant.BOOK_ID_NOT_PROVIDED });
+
+      if (data > 0) {
+        res.json({ success: true, message: "Deleted" });
+      } else {
+        res.json({
+          success: false,
+          message: "Book cannot be deleted. Book not found.",
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting book:", error);
+      res.status(500).json({
+        success: false,
+        message: "Error occurred while deleting the book",
+      });
     }
   }
+
   async searchBook(req, res) {
     const { q } = req.query;
+
     if (q) {
       const data = await bookModel.findAll({
         where: {
@@ -81,16 +97,16 @@ export default class BookController {
             },
           },
         },
+        raw: true,
       });
-      if (data[0]) {
-        console.log(data);
-        res.json(data);
-      } else {
-        res.json({ success: false, message: "Not Found." });
+
+      console.log(data);
+      for (let d of data) {
+        d.image = urlConstant.IMG_PATH_URL + d.image;
+        console.log(d.image);
       }
-    } else {
-      res.json({ success: false, message: "Empty search, how it work?" });
-    }
+      res.json(data);
+    } else res.json({ success: false, message: "Empty Query Search string." });
   }
 
   async getBooks(req, res) {
